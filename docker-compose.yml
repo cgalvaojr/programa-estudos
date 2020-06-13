@@ -1,0 +1,80 @@
+version: '3.7'
+services:
+  backend-service:
+    container_name: programa-estudos-backend
+    build: ./backend
+    image: cgalvaojr/php-fpm:latest
+    working_dir: /application
+    volumes:
+      - ./backend:/application
+      - ./backend/docker-files/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+    environment:
+      - UPDATE_COMPOSER_DEPENDENCIES=true
+      - USE_PHP_FPM=true
+    depends_on:
+      - database-service
+    links:
+      - database-service
+    restart: on-failure
+    networks:
+      - programa-estudos-network
+
+  frontend-service:
+    image: node:10
+    container_name: programa-estudos-frontend
+    user: "node"
+    working_dir: /home/node/app
+    volumes:
+      - ./frontend:/home/node/app
+    command:
+      sh -c 'cp .env.example .env && npm i && npm run serve'
+    ports:
+      - "8081:8080"
+    environment:
+      - NODE_ENV=development
+    networks:
+      - programa-estudos-network
+
+  programa-estudos-webserver-service:
+    container_name: programa-estudos-nginx
+    build:
+      context: ./backend
+      dockerfile: NginxDockerfile
+      args:
+        EXPOSE_PORT: 80
+    image: cgalvaojr/programa-estudos-nginx:latest
+    working_dir: /application
+    volumes:
+      - ./backend:/application
+      - ./backend/docker-files/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "81:80"
+    depends_on:
+      - backend-service
+    networks:
+      - programa-estudos-network
+
+  database-service:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    container_name: programa-estudos-database
+    environment:
+      - MYSQL_DATABASE=programa-estudos
+      - MYSQL_USER=programa
+      - MYSQL_PASSWORD=Pr0gr@M@
+      - MYSQL_ROOT_PASSWORD=root
+    ports:
+      - "3317:3306"
+    expose:
+      - "3306"
+    volumes:
+      - ./docker-data/mysql:/var/lib/mysql
+      - ./docker-data/migrate:/docker-entrypoint-initdb.d
+    networks:
+      - programa-estudos-network
+
+networks:
+  programa-estudos-network:
+    name: programa-estudos-network
+    driver: bridge
