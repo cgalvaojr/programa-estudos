@@ -30,22 +30,29 @@
             ...mapGetters({
                 orgaosGetter: 'orgaos',
                 bancasGetter: 'bancas',
+                assuntosGetter: 'assuntos',
                 loadingOrgaosGetter: 'loadingOrgaos',
-                loadingBancasGetter: 'loadingBancas'
+                loadingBancasGetter: 'loadingBancas',
+                loadingAssuntosGetter: 'loadingASsuntos',
             }),
         },
         methods: {
             ...mapActions({
                 fetchAllOrgaos: 'fetchAllOrgaos',
                 fetchAllBancas: 'fetchAllBancas',
+                fetchAllAssuntos: 'fetchAllAssuntos',
                 loadingOrgaos: 'loadingOrgaos',
-                loadingBancas: 'loadingBancas'
+                loadingBancas: 'loadingBancas',
+                loadingAssuntos: 'loadingAssuntos',
             }),
             manageDialogCadastrarPrograma() {
                 this.dialogCadastrarProgramaEstudos = !this.dialogCadastrarProgramaEstudos;
             },
         },
         mounted() {
+            this.fetchAllAssuntos().then(() => {
+                this.loadingAssuntos(false);
+            })
             this.fetchAllOrgaos().then(() => {
                 this.loadingOrgaos(false);
             });

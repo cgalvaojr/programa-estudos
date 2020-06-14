@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use App\Questao;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class QuestaoController extends Controller
 {
+    private $service;
+
+    public function __construct(\App\Http\Service\Questao $questao)
+    {
+        $this->service = $questao;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,11 @@ class QuestaoController extends Controller
      */
     public function index()
     {
-        //
+        try {
+            return $this->service->listarQuestoes();
+        } catch (\Exception $exception) {
+            throw $exception;
+        }
     }
 
     /**
@@ -25,7 +35,7 @@ class QuestaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        throw new \HttpException('Método não implementado', Response::HTTP_METHOD_NOT_ALLOWED);
     }
 
     /**
@@ -36,7 +46,7 @@ class QuestaoController extends Controller
      */
     public function show(Questao $questao)
     {
-        //
+        throw new \HttpException('Método não implementado', Response::HTTP_METHOD_NOT_ALLOWED);
     }
 
     /**
@@ -48,7 +58,7 @@ class QuestaoController extends Controller
      */
     public function update(Request $request, Questao $questao)
     {
-        //
+        throw new \HttpException('Método não implementado', Response::HTTP_METHOD_NOT_ALLOWED);
     }
 
     /**
@@ -59,6 +69,6 @@ class QuestaoController extends Controller
      */
     public function destroy(Questao $questao)
     {
-        //
+        throw new \HttpException('Método não implementado', Response::HTTP_METHOD_NOT_ALLOWED);
     }
 }

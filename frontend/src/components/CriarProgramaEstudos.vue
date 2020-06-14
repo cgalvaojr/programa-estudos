@@ -76,11 +76,11 @@
                 }
             },
             resetForm(){
-
+                this.formulario = {
+                    id_orgao : null,
+                    id_banca: null
+                };
             }
-        },
-        mounted() {
-            console.log(this.orgaos);
         },
         watch: {
             value(val) {
@@ -88,6 +88,7 @@
 
                 if (!val) {
                     this.resetForm();
+                    this.$refs.form.resetValidation();
                 }
             },
         }

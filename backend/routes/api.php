@@ -24,4 +24,5 @@ Route::group([
     Route::apiResource('assunto', 'AssuntoController')->only(['index']);
     Route::apiResource('orgao', 'OrgaoController')->only(['index']);
     Route::apiResource('banca', 'BancaController')->only(['index']);
+    Route::apiResource('questao', 'QuestaoController')->only(['index']);
 });
