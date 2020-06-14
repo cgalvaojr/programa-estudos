@@ -73,6 +73,10 @@ services:
       - ./docker-data/migrate:/docker-entrypoint-initdb.d
     networks:
       - programa-estudos-network
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 20
 
 networks:
   programa-estudos-network:

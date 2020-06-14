@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::group([
+    'prefix' => 'programa'
+], function ($router) {
+    Route::apiResource('assunto', 'AssuntoController')->only(['index']);
+    Route::apiResource('orgao', 'OrgaoController')->only(['index']);
+    Route::apiResource('banca', 'BancaController')->only(['index']);
 });
