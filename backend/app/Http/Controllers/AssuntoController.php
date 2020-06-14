@@ -22,7 +22,7 @@ class AssuntoController extends Controller
     public function index()
     {
         try {
-            return Assunto::collection(\App\Models\Assunto::assuntosPai()->get());
+            return Assunto::collection($this->service->listarAssuntos());
         } catch (\Exception $exception) {
             throw $exception;
         }

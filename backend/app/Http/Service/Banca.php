@@ -15,6 +15,6 @@ class Banca extends AbstractService
 
     public function listarBancas()
     {
-        return $this->repository->all();
+        return $this->repository->findBy();
     }
 }

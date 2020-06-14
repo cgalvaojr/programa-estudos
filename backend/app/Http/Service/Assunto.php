@@ -15,6 +15,6 @@ class Assunto extends AbstractService
 
     public function listarAssuntos()
     {
-        return $this->repository->all();
+        return $this->repository->getModel()->assuntosPai()->get();
     }
 }

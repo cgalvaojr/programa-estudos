@@ -66,7 +66,7 @@ abstract class AbstractRepository implements RepositoryInterface
      * @param $arrData
      * @return Object
      */
-    public function findBy($arrData)
+    public function findBy($arrData = [])
     {
         $strModel = $this->model->getTable();
         return DB::table($strModel)->where($arrData)->get();

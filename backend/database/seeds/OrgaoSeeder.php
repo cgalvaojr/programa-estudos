@@ -14,8 +14,8 @@ class OrgaoSeeder extends Seeder
      */
     public function run()
     {
-        foreach($this->orgaosIniciais() as $orgao) {
-            OrgaoModel::firstOrCreate($orgao);
+        foreach ($this->orgaosIniciais() as $orgao) {
+            OrgaoModel::create($orgao);
         }
     }
 }

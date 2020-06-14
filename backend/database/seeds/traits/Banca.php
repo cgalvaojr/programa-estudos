@@ -2,7 +2,8 @@
 
 namespace seeds\traits;
 
-trait Banca {
+trait Banca
+{
 
     public function bancasIniciais()
     {

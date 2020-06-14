@@ -15,6 +15,6 @@ class Orgao extends AbstractService
 
     public function listarOrgaos()
     {
-        return $this->repository->all();
+        return $this->repository->findBy();
     }
 }

@@ -16,10 +16,10 @@ class AssuntoSeeder extends Seeder
     {
         foreach ($this->assuntoIniciais() as $assunto) {
             $filhos = array_pop($assunto);
-            $pai = AssuntoModel::firstOrCreate($assunto);
+            $pai = AssuntoModel::create($assunto);
 
             foreach ($filhos as $assuntoFilho) {
-                $pai->assuntosFilhos()->attach(AssuntoModel::firstOrCreate($assuntoFilho)['id_assunto']);
+                $pai->assuntosFilhos()->attach(AssuntoModel::create($assuntoFilho)['id_assunto']);
             }
         }
     }

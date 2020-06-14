@@ -15,7 +15,7 @@ class QuestaoSeeder extends Seeder
     public function run()
     {
         foreach ($this->questoesIniciais() as $questao) {
-            QuestaoModel::firstOrCreate($questao);
+            QuestaoModel::create($questao);
         }
     }
 }

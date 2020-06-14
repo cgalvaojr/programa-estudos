@@ -15,8 +15,7 @@ class CreateOrgaosTable extends Migration
     {
         Schema::create('tb_orgao', function (Blueprint $table) {
             $table->id('id_orgao');
-            $table->string('no_orgao', 100);
-            $table->string('sg_orgao', 10);
+            $table->string('no_orgao', 150);
         });
     }
 
