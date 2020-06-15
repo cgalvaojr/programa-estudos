@@ -2,7 +2,7 @@ import axios from '../../request/index';
 
 const state = () => ({
     bancas: [],
-    loadingbancas: true
+    loadingBancas: true
 })
 
 const getters = {
@@ -16,7 +16,7 @@ const actions = {
             commit('loadingBancas', false)
         });
     },
-    loadingbancas({commit, status}) {
+    loadingBancas({commit, status}) {
         commit('loadingBancas', status);
     }
 }
@@ -25,7 +25,7 @@ const mutations = {
     fetchAllBancas(state, {data}) {
         state.bancas = data;
     },
-    loadingbancas(state, status) {
+    loadingBancas(state, status) {
         state.loadingbancas = status;
     }
 }

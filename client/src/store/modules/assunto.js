@@ -16,7 +16,7 @@ const actions = {
             commit('loadingAssuntos', false)
         });
     },
-    loadingassuntos({commit, status}) {
+    loadingAssuntos({commit, status}) {
         commit('loadingAssuntos', status);
     }
 }
@@ -26,7 +26,7 @@ const mutations = {
         state.assuntos = data;
     },
     loadingAssuntos(state, status) {
-        state.loadingassuntos = status;
+        state.loadingAssuntos = status;
     }
 }
 

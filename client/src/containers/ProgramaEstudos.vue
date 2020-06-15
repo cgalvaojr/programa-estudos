@@ -10,6 +10,8 @@
             :orgaos="orgaosGetter"
             :bancas="bancasGetter"
             @manage-dialog="manageDialogCadastrarPrograma"
+            @inserir-programa-estudos="inserirProgramaEstudos"
+
         />
     </LayoutComum>
 </template>
@@ -31,9 +33,12 @@
                 orgaosGetter: 'orgaos',
                 bancasGetter: 'bancas',
                 assuntosGetter: 'assuntos',
+                questoesGetter: 'questoes',
+                programaDeEstudosGetter: 'programasEstudos',
                 loadingOrgaosGetter: 'loadingOrgaos',
                 loadingBancasGetter: 'loadingBancas',
                 loadingAssuntosGetter: 'loadingASsuntos',
+                loadingQuestoesGetter: 'loadingQuestoes',
             }),
         },
         methods: {
@@ -41,17 +46,28 @@
                 fetchAllOrgaos: 'fetchAllOrgaos',
                 fetchAllBancas: 'fetchAllBancas',
                 fetchAllAssuntos: 'fetchAllAssuntos',
+                fetchAllQuestoes: 'fetchAllQuestoes',
+                setProgramaEstudos: 'setProgramaEstudos',
                 loadingOrgaos: 'loadingOrgaos',
                 loadingBancas: 'loadingBancas',
                 loadingAssuntos: 'loadingAssuntos',
+                loadingQuestoes: 'loadingQuestoes',
             }),
             manageDialogCadastrarPrograma() {
                 this.dialogCadastrarProgramaEstudos = !this.dialogCadastrarProgramaEstudos;
             },
+            inserirProgramaEstudos(params) {
+                params.assuntos = this.assuntosGetter;
+                params.questoes = this.questoesGetter;
+                this.setProgramaEstudos(params);
+            }
         },
         mounted() {
             this.fetchAllAssuntos().then(() => {
                 this.loadingAssuntos(false);
+            });
+            this.fetchAllQuestoes().then(() => {
+                this.loadingQuestoes(false);
             })
             this.fetchAllOrgaos().then(() => {
                 this.loadingOrgaos(false);

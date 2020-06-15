@@ -1,13 +1,13 @@
 version: '3.7'
 services:
   backend-service:
-    container_name: programa-estudos-backend
-    build: ./backend
+    container_name: programa-estudos-server
+    build: server
     image: cgalvaojr/php-fpm:latest
     working_dir: /application
     volumes:
-      - ./backend:/application
-      - ./backend/docker-files/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
+      - ./server:/application
+      - ./server/docker-files/php-fpm/php-ini-overrides.ini:/etc/php/7.2/fpm/conf.d/99-overrides.ini
     environment:
       - UPDATE_COMPOSER_DEPENDENCIES=true
       - USE_PHP_FPM=true
@@ -21,11 +21,11 @@ services:
 
   frontend-service:
     image: node:10
-    container_name: programa-estudos-frontend
+    container_name: programa-estudos-client
     user: "node"
     working_dir: /home/node/app
     volumes:
-      - ./frontend:/home/node/app
+      - ./client:/home/node/app
     command:
       sh -c 'cp .env.example .env && npm i && npm run serve'
     ports:
@@ -38,15 +38,15 @@ services:
   programa-estudos-webserver-service:
     container_name: programa-estudos-nginx
     build:
-      context: ./backend
+      context: server
       dockerfile: NginxDockerfile
       args:
         EXPOSE_PORT: 80
     image: cgalvaojr/programa-estudos-nginx:latest
     working_dir: /application
     volumes:
-      - ./backend:/application
-      - ./backend/docker-files/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./server:/application
+      - ./server/docker-files/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
       - "81:80"
     depends_on:

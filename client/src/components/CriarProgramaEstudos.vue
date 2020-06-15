@@ -72,7 +72,7 @@
         methods:{
             enviarFormulario(){
                 if (this.$refs.form.validate()) {
-                    this.loadingEnviar = true;
+                    this.$emit('inserir-programa-estudos', this.formulario);
                 }
             },
             resetForm(){

@@ -50,24 +50,24 @@ class Assunto extends Model
             Assunto::class,
             'tb_arvore_assunto',
             'id_assunto_pai',
-            'id_assunto_filho'
-        );
+            'id_assunto_filho',
+            'id_assunto',
+            'id_assunto'
+        )->withCount('questoes');
     }
 
     /**
      * @param array $arrParam
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function questoes(array $params = []): HasMany
+    public function questoes(): HasMany
     {
         $questoes = $this->hasMany(
             Questao::class,
             'id_assunto',
             'id_assunto'
         );
-        if ($params) {
-            $questoes->where($params);
-        }
+
         return $questoes;
     }
 
