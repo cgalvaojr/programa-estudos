@@ -11,10 +11,10 @@
             :bancas="bancasGetter"
             @manage-dialog="manageDialogCadastrarPrograma"
             @inserir-programa-estudos="inserirProgramaEstudos"
-
+            :not-found="notFoundGetter"
         />
 
-        <card-arvore-assunto :items="programaDeEstudosGetter" />
+        <card-arvore-assunto :items="programaDeEstudosGetter"  />
     </LayoutComum>
 </template>
 
@@ -28,7 +28,15 @@
         components: {CardArvoreAssunto, CriarProgramaEstudos, LayoutComum},
         data() {
             return {
-                dialogCadastrarProgramaEstudos: false
+                dialogCadastrarProgramaEstudos: false,
+                notFound: false
+            }
+        },
+        watch:{
+            programaDeEstudosGetter(val){
+                if(val) {
+                    this.manageDialogCadastrarPrograma();
+                }
             }
         },
         computed: {
@@ -42,6 +50,7 @@
                 loadingBancasGetter: 'loadingBancas',
                 loadingAssuntosGetter: 'loadingASsuntos',
                 loadingQuestoesGetter: 'loadingQuestoes',
+                notFoundGetter: 'notFound'
             }),
         },
         methods: {
@@ -55,9 +64,13 @@
                 loadingBancas: 'loadingBancas',
                 loadingAssuntos: 'loadingAssuntos',
                 loadingQuestoes: 'loadingQuestoes',
+                setNotFound: 'setNotFound'
             }),
             manageDialogCadastrarPrograma() {
                 this.dialogCadastrarProgramaEstudos = !this.dialogCadastrarProgramaEstudos;
+                if(this.dialogCadastrarProgramaEstudos) {
+                    this.setNotFound(false);
+                }
             },
             inserirProgramaEstudos(params) {
                 params.assuntos = this.assuntosGetter;
@@ -69,16 +82,18 @@
             this.fetchAllAssuntos().then(() => {
                 this.loadingAssuntos(false);
             });
+
             this.fetchAllQuestoes().then(() => {
                 this.loadingQuestoes(false);
-            })
+            });
+
             this.fetchAllOrgaos().then(() => {
                 this.loadingOrgaos(false);
             });
 
             this.fetchAllBancas().then(() => {
                 this.loadingBancas(false);
-            })
+            });
         }
     }
 </script>

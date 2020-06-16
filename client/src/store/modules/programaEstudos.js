@@ -1,19 +1,25 @@
 const state = () => ({
     programaEstudos: [],
+    notFound: false
 })
 
 const getters = {
-    programasEstudos : (state) => state.programaEstudos
+    programasEstudos : (state) => state.programaEstudos,
+    notFound : (state) => state.notFound
 };
 
 const actions = {
     setProgramaEstudos({commit}, params) {
         commit('setProgramaEstudos', params);
     },
+    setNotFound({commit}, params) {
+        commit('setNotFound', params);
+    },
 }
 
 const mutations = {
     setProgramaEstudos(state, params) {
+        state.notFound = false;
         params.assuntos.data.map(assunto => {
             params.questoes.map(questao => {
                 if(questao.id_banca === params.banca.id_banca &&
@@ -31,10 +37,15 @@ const mutations = {
                             {...assunto},
                         ];
                      }
+                } else {
+                    state.notFound = true;
                 }
             })
         })
     },
+    setNotFound(state, status) {
+        state.notFound = status;
+    }
 }
 
 export default {

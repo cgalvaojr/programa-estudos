@@ -36,6 +36,10 @@
                     />
                 </v-col>
             </v-row>
+
+            <v-alert type="warning" v-if="notFound" text>
+                Nenhuma questão encontrada para os filtros selecionados!
+            </v-alert>
         </v-form>
     </form-dialog>
 </template>
@@ -54,7 +58,7 @@
                     banca: {}
                 },
                 rules: {
-                    required: value => !!value || 'Este campo é obrigatório',
+                    required: value => !!Object.keys(value).length || 'Este campo é obrigatório',
                 }
             }
         },
@@ -70,6 +74,10 @@
                 type: Array,
                 required: true
             },
+            notFound: {
+                type: Boolean,
+                required: true
+            }
         },
         methods:{
             enviarFormulario(){
@@ -80,7 +88,7 @@
             resetForm(){
                 this.formulario = {
                     orgao : {},
-                    banca: null
+                    banca: {}
                 };
             }
         },

@@ -31,7 +31,7 @@
     </div>
 
     <div v-else>
-        <v-card>
+        <v-card max-width="98%">
             <v-card-text>
                 <span class="primary--text bolder">Você não prossui nenhum programa de estudos cadastrado!</span>
             </v-card-text>
@@ -48,7 +48,7 @@
             items : {
                 type: Array,
                 required: true
-            }
+            },
         }
     }
 </script>
