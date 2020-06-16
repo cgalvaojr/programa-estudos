@@ -19,8 +19,6 @@
     `docker-compose up --build -d`
 3. Acesse a imagem do backend:<br />
     `docker exec -it programa-estudos-server sh`
-4. Execute as migrations, gerando as tabelas e dados básicos: <br />
-    php artisan migrate --seed`
-5. Acesse a aplicação e voilà: <br />
+4. Acesse a aplicação e voilà: <br />
     `localhost:8081`
 
