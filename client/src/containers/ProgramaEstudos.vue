@@ -13,6 +13,8 @@
             @inserir-programa-estudos="inserirProgramaEstudos"
 
         />
+
+        <card-arvore-assunto :items="programaDeEstudosGetter" />
     </LayoutComum>
 </template>
 
@@ -20,9 +22,10 @@
     import LayoutComum from "../components/layout/LayoutComum";
     import CriarProgramaEstudos from "../components/CriarProgramaEstudos";
     import {mapActions, mapGetters} from 'vuex';
+    import CardArvoreAssunto from "../components/CardArvoreAssunto";
     export default {
         name: "ProgramaEstudos",
-        components: {CriarProgramaEstudos, LayoutComum},
+        components: {CardArvoreAssunto, CriarProgramaEstudos, LayoutComum},
         data() {
             return {
                 dialogCadastrarProgramaEstudos: false

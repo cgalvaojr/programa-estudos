@@ -15,22 +15,24 @@
             <v-row>
                 <v-col>
                     <v-select
-                        v-model="formulario.id_banca"
+                        v-model="formulario.banca"
                         :items="bancas"
                         item-text="no_banca"
                         item-value="id_banca"
                         :rules="[rules.required]"
                         label="Banca"
+                        return-object
                     />
                 </v-col>
                 <v-col>
                     <v-select
-                        v-model="formulario.id_orgao"
+                        v-model="formulario.orgao"
                         :items="orgaos"
                         item-text="no_orgao"
                         item-value="id_orgao"
                         :rules="[rules.required]"
                         label="Órgão"
+                        return-object
                     />
                 </v-col>
             </v-row>
@@ -42,14 +44,14 @@
     import FormDialog from "./dialogs/FormDialog";
     export default {
         name: "CriarProgramaEstudos",
-        components: { FormDialog },
+        components: {FormDialog },
         data() {
             return {
                 dialog: false,
                 loadingEnviar: false,
                 formulario: {
-                    id_orgao : null,
-                    id_banca: null
+                    orgao : {},
+                    banca: {}
                 },
                 rules: {
                     required: value => !!value || 'Este campo é obrigatório',
@@ -67,7 +69,7 @@
             bancas: {
                 type: Array,
                 required: true
-            }
+            },
         },
         methods:{
             enviarFormulario(){
@@ -77,8 +79,8 @@
             },
             resetForm(){
                 this.formulario = {
-                    id_orgao : null,
-                    id_banca: null
+                    orgao : {},
+                    banca: null
                 };
             }
         },
