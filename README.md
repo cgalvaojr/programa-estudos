@@ -17,8 +17,6 @@
     `git clone https://github.com/cgalvaojr/programa-estudos.git && cd programa-estudos`
 2. Faça o build das imagens do docker:<br />
     `docker-compose up --build -d`
-3. Acesse a imagem do backend:<br />
-    `docker exec -it programa-estudos-server sh`
-4. Acesse a aplicação e voilà: <br />
+3. Acesse a aplicação e voilà: <br />
     `localhost:8081`
 
