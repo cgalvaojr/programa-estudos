@@ -17,7 +17,7 @@ if  ! [ -e "/application/.env" ] ; then
 fi
 
 chmod -R 777 /application/storage
-chmod -R 777 /aplication/bootstrap/cache
+#chmod -R 777 /aplication/bootstrap/cache
 
 echo "[ ****************** ] Ending Endpoint of Application"
 
