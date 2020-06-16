@@ -15,7 +15,7 @@
 
 1. Clone o repositório: git clone https://github.com/cgalvaojr/programa-estudos.git && cd programa-estudos
 2. Faça o build das imagens do docker: docker-compose up --build -d
-3. Acesse a imagem do backend: docker-exec -it programa-estudos-server sh
+3. Acesse a imagem do backend: docker exec -it programa-estudos-server sh
 4. Execute as migrations, gerando as tabelas e dados básicos: php artisan migrate --seed
 5. Acesse a aplicação e voilà: localhost:8081
 
