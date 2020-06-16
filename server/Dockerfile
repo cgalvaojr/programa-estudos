@@ -2,6 +2,8 @@ FROM php:7.4-fpm
 
 WORKDIR "/application"
 
+RUN chown -R www-data:www-data "/application"
+
 RUN apt-get update --fix-missing \
     && apt-get install -y apt-utils \
     && apt-get install -y libcurl4-gnutls-dev \
@@ -32,9 +34,7 @@ ENTRYPOINT ["docker-entrypoint.sh"]
 RUN chmod 777 /usr/local/bin/docker-entrypoint.sh \
     && ln -s /usr/local/bin/docker-entrypoint.sh /
 
-RUN chmod 777 -R storage/
-
-RUN chmod 777 -R bootstrap/cache/
-
 RUN docker-php-ext-install bcmath \
-    && docker-php-ext-enable bcmath \
+    && docker-php-ext-enable bcmath
+
+

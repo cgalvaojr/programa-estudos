@@ -12,8 +12,12 @@ if  ! [ -e "/application/.env" ] ; then
      echo "[ ****************** ] Copying sample application configuration to real one"
      cp /application/.env.example /application/.env
 
-     php artisan migrate:refresh && php artisan db:seed
+
+     php artisan migrate:refresh --seed
 fi
+
+chmod -R 777 /application/storage
+chmod -R 777 /aplication/bootstrap/cache
 
 echo "[ ****************** ] Ending Endpoint of Application"
 
